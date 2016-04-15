@@ -1,0 +1,24 @@
+{
+  "name": "uis-tgbot-sdk",
+  "version": "0.0.1",
+  "description": "Tiny devkit to create a telegram bot with complicated structures",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaskar2008/node-tgbot-sdk.git"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "tSDK"
+  ],
+  "author": "kaskar2008",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaskar2008/node-tgbot-sdk/issues"
+  },
+  "homepage": "https://github.com/kaskar2008/node-tgbot-sdk#readme"
+}
