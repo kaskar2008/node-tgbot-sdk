@@ -1,1 +1,1 @@
-module.exports = require('./classes/sdk').TGBotSDK;
+module.exports = require('./lib/sdk').TGBotSDK;
