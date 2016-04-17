@@ -9,7 +9,7 @@ class TGBotSDK {
 
 	constructor(token, options = {}) {
 		this.bot = new TelegramBot(token, options);
-		this.groups = new TGBotGroup();
+		this.groups = new TGBotGroup(this);
 		this.config = new TGBotConfig();
 		this.users = new TGBotUsers();
 		this.userFunctions = null;
