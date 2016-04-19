@@ -46,29 +46,20 @@ class TGBotGroup {
 		return false;
 	}
 
-	groupListToMenuObject() {
+	groupListToMenuObject(onSelectItem) {
+		sdk = this.sdk;
 		var list = [];
-		var botGroups = ufunc.sdk.groups.list;
+		var botGroups = this.groups.list;
 		for (var group in botGroups) {
 			if (botGroups.hasOwnProperty(group)) {
-				var boolshit = function(group) {
+				var stupidMethodToPreventErrors = function(group) {
 					var regex = new RegExp(botGroups[group].name.toLowerCase()+" list","i");
-					var obj = {cmd_regex: regex, name: botGroups[group].name+' list', info: 'Update '+group+' list for this bot.', icon: icons.update, AL: 2, call: function(msg) {
-						getGroup(group, function() {
-							var listToSend = [];
-							for(var i=0; i<botGroups[group].members.length; i++) {
-								if(sessionList[botGroups[group].members[i]] && sessionList[botGroups[group].members[i]].profile.username != '')
-									listToSend.push('@'+sessionList[botGroups[group].members[i]].profile.username + ' ['+botGroups[group].members[i]+']');
-								else
-									listToSend.push(botGroups[group].members[i]);
-							}
-							sessionList[msg.from.id].menu_url = [];
-							bot.sendMessage(msg.from.id, "You are "+sessionList[msg.from.id].profile.user_role+'\nBot '+group+' are:\n'+listToSend.join('\n'), getKeyboard(1,msg.from.id));
-						});
+					var obj = {cmd_regex: regex, name: botGroups[group].name+' list', info: 'Update '+botGroups[group].alias+' list for this bot.', icon: sdk.config.getParam("icons").update, AL: 2, call: function(msg) {
+						onSelectItem(msg, group, callback);
 					}};
 					list.push(obj);
 				};
-				boolshit(group);
+				stupidMethodToPreventErrors(group);
 			}
 		}
 		return list;
