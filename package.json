@@ -1,6 +1,6 @@
 {
   "name": "uis-tgbot-sdk",
-  "version": "0.0.10",
+  "version": "0.0.27",
   "description": "Tiny devkit to create a telegram bot with complicated structures",
   "main": "index.js",
   "scripts": {

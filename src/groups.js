@@ -32,9 +32,24 @@ class TGBotGroup {
 			this.list[name] = {
 				members: members,
 				level: level,
-				alias: alias
+				alias: alias,
+				name: name
 			};
 			return true;
+		}
+	}
+
+	find(alias) {
+		if(this.list.hasOwnProperty(alias)) {
+			return this.list[alias];
+		} else {
+			for(var group in this.list) {
+				if(group.name == alias) {
+					return group;
+					break;
+				}
+			}
+			return false;
 		}
 	}
 
@@ -47,20 +62,18 @@ class TGBotGroup {
 	}
 
 	groupListToMenuObject(onSelectItem) {
-		sdk = this.sdk;
+		var sdk = this.sdk;
 		var list = [];
-		var botGroups = this.groups.list;
+		var botGroups = this.list;
 		for (var group in botGroups) {
-			if (botGroups.hasOwnProperty(group)) {
-				var stupidMethodToPreventErrors = function(group) {
-					var regex = new RegExp(botGroups[group].name.toLowerCase()+" list","i");
-					var obj = {cmd_regex: regex, name: botGroups[group].name+' list', info: 'Update '+botGroups[group].alias+' list for this bot.', icon: sdk.config.getParam("icons").update, AL: 2, call: function(msg) {
-						onSelectItem(msg, group, callback);
-					}};
-					list.push(obj);
-				};
-				stupidMethodToPreventErrors(group);
-			}
+			var stupidMethodToPreventErrors = function(group) {
+				var regex = new RegExp(group.name.toLowerCase()+" list","i");
+				var obj = {cmd_regex: regex, name: group.name+' list', info: 'Update '+group.alias+' list for this bot.', icon: sdk.config.getParam("icons").update, AL: 2, call: function(msg) {
+					onSelectItem(msg, group);
+				}};
+				list.push(obj);
+			};
+			stupidMethodToPreventErrors(botGroups[group]);
 		}
 		return list;
 	}

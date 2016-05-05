@@ -18,7 +18,7 @@ class TGBotSDK {
 		this.groups = new TGBotGroup(this);
 		this.config = new TGBotConfig();
 		this.users = new TGBotUsers();
-		this.functions = new TGBotFunctions();
+		this.functions = new TGBotFunctions(this);
 		this.userFunctions = null;
 	}
 
